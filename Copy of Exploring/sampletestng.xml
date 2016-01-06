@@ -1,0 +1,7 @@
+<suite name="Execuitions">
+	<test name="Add">
+		<classes>
+			<class name="com.test.ant.Dummy"></class>
+		</classes>
+	</test>
+</suite>

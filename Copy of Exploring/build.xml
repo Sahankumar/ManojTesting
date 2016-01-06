@@ -1,0 +1,33 @@
+<project name="Sample TestNG" default="testng-execution">
+	<path id="ourclasspath">
+		<fileset dir="./lib" includes="testng.jar">
+		</fileset>
+	</path>
+
+	<target name="clean">
+		<delete dir="./bin" />
+		<mkdir dir="./bin" />
+	</target>
+
+	<target name="copy-non-java-files">
+		<copy todir="bin" includeemptydirs="false">
+			<fileset dir="${basedir}/src" includes="*.class">
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="compile" depends="clean,copy-non-java-files">
+		<javac srcdir="./src" destdir="bin" classpathref="ourclasspath">
+		</javac>
+	</target>
+
+	<taskdef name="testng" classname="org.testng.TestNGAntTask" classpathref="ourclasspath" />
+	<target name="testng-execution" depends="compile">
+		<mkdir dir="test-output" />
+		<testng outputdir="test-output" classpath="bin" classpathref="ourclasspath">
+			<xmlfileset dir="." includes="sampletestng.xml" />
+		</testng>
+	</target>
+
+
+</project>
